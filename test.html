@@ -1,0 +1,47 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>- jsFiddle demo by vilaskumkar</title>
+      <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+      <script src="http://code.jquery.com/jquery-1.9.1.js" type="text/javascript"></script>
+      <!-- Add all you JS File in head -->
+      <!-- <link href="/css/result-light.css" rel="stylesheet" type="text/css"> -->
+      <script type="text/javascript">
+      function autocomplet() {
+        var min_length = 0;
+        var keyword = $('#Name').val();
+        if (keyword.length >= min_length) {
+          $.ajax({
+            url: "search.php",
+            type: "POST",
+            data: {
+              keyword: keyword
+            },
+            success: function(data) {
+              $('#Name_list_id').show();
+              $('#Name_list_id').html(data);
+            }
+          });
+        } else {
+          $('#Name_list_id').hide();
+        }
+      }
+
+      function set_item(item) {
+        $('#Name').val(item);
+        $('#Name_list_id').hide();
+      }
+    </script>
+  </head>
+
+  <body>
+
+
+    <form>
+      <input class="form-control" id="Name" name="name" onkeyup=
+      "autocomplet()" type="text">
+    </form>
+
+    <ul id="Name_list_id"></ul>
+  </body>
+  </html>
